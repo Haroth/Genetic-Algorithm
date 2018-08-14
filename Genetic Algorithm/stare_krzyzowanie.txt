@@ -1,0 +1,95 @@
+void Gatunek::krzyzowanie()
+{
+    int* os1, *os2;
+    int losowa;
+    int dziecko[ROZMIAR_PROBLEMU];
+    vector <int> os1Geny;
+    vector <int> os2Geny;
+    bool flaga=false;
+    for (int i=0; i<wybrani.size()-1; i++)
+    {
+        os1=wybrani[i].getGeny();
+        for (int j=i+1; j<wybrani.size(); j++)
+        {
+            os2=wybrani[j].getGeny();
+            //losowa=rand()%(ROZMIAR_PROBLEMU-1)+1;
+            losowa=rand()%(ROZMIAR_PROBLEMU-wysrodkowaniePrzeciecia)+wysrodkowaniePrzeciecia/2+1;
+            if (losowa>ROZMIAR_PROBLEMU/2)
+            {
+                flaga=true;
+                for (int k=losowa; k<ROZMIAR_PROBLEMU; k++)
+                {
+                    os1Geny.push_back(os1[k]);
+                    os2Geny.push_back(os2[k]);
+                }
+            }
+            else
+            {
+                flaga=false;
+                for (int k=0; k<losowa; k++)
+                {
+                    os1Geny.push_back(os1[k]);
+                    os2Geny.push_back(os2[k]);
+                }
+            }
+            for (int k=0; k<os1Geny.size(); k++)
+            {
+                if (os1Geny[k]==os2Geny[k])
+                {
+                    os1Geny.erase(os1Geny.begin()+k);
+                    os2Geny.erase(os2Geny.begin()+k);
+                    k--;
+                    continue;
+                }
+                for (int l=k+1; l<os2Geny.size(); l++)
+                {
+                    if (os1Geny[k]==os2Geny[l])
+                    {
+                        os1Geny[k]=os1Geny[l];
+                        os1Geny.erase(os1Geny.begin()+l);
+                        os2Geny.erase(os2Geny.begin()+l);
+                        k--;
+                        continue;
+                    }
+                    if (os2Geny[k]==os1Geny[l])
+                    {
+                        os2Geny[k]=os2Geny[l];
+                        os1Geny.erase(os1Geny.begin()+l);
+                        os2Geny.erase(os2Geny.begin()+l);
+                        k--;
+                        continue;
+                    }
+                }
+            }
+
+            for (int k=0; k<losowa; k++)
+                dziecko[k]=os1[k];
+            for (int k=losowa; k<ROZMIAR_PROBLEMU; k++)
+                dziecko[k]=os2[k];
+
+            if (flaga)
+            {
+                for (int k=0; k<os1Geny.size(); k++)
+                    for (int l=losowa; l<ROZMIAR_PROBLEMU; l++)
+                        if (os2Geny[k]==dziecko[l])
+                        {
+                            dziecko[l]=os1Geny[k];
+                            break;
+                        }
+            }
+            else
+            {
+                for (int k=0; k<os1Geny.size(); k++)
+                    for (int l=0; l<losowa; l++)
+                        if (os1Geny[k]==dziecko[l])
+                        {
+                            dziecko[l]=os2Geny[k];
+                            break;
+                        }
+            }
+            os1Geny.clear();
+            os2Geny.clear();
+            populacja.push_back(dziecko);
+        }
+    }
+}

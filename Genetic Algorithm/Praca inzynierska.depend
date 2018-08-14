@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1482441457 source:d:\programy\praca inzynierska\klasa.cpp
+	"klasa.h"
+
+1482358680 source:d:\programy\praca inzynierska\main.cpp
+	<iostream>
+	"klasa.h"
+
+1482441545 d:\programy\praca inzynierska\klasa.h
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cstdlib>
+	<vector>
+	<stdio.h>
+	<time.h>
+	<cmath>
+
+1482453811 source:c:\users\wiktor\documents\github\genetic-algorithm\genetic algorithm\klasa.cpp
+	"klasa.h"
+
+1534262019 c:\users\wiktor\documents\github\genetic-algorithm\genetic algorithm\klasa.h
+	<iostream>
+	<fstream>
+	<iomanip>
+	<cstdlib>
+	<vector>
+	<stdio.h>
+	<time.h>
+	<cmath>
+
+1534262020 source:c:\users\wiktor\documents\github\genetic-algorithm\genetic algorithm\main.cpp
+	<iostream>
+	"klasa.h"
+
